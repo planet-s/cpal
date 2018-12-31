@@ -125,7 +125,7 @@ extern crate stdweb;
 
 pub use samples_formats::{Sample, SampleFormat};
 
-#[cfg(not(any(windows, target_os = "linux", target_os = "freebsd",
+#[cfg(not(any(windows, target_os = "linux", target_os = "freebsd", target_os = "redox",
               target_os = "macos", target_os = "ios", target_os = "emscripten")))]
 use null as cpal_impl;
 
@@ -151,6 +151,10 @@ mod cpal_impl;
 
 #[cfg(target_os = "emscripten")]
 #[path = "emscripten/mod.rs"]
+mod cpal_impl;
+
+#[cfg(target_os = "redox")]
+#[path = "redox/mod.rs"]
 mod cpal_impl;
 
 /// An opaque type that identifies a device that is capable of either audio input or output.
